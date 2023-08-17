@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.itcy.security.mapper.MenuMapper">
+    <select id="selectPermsByUserId" resultType="java.lang.String">
+        select DISTINCT m.perms
+        from user_role ur
+                 left join role r on r.id = ur.role_id
+                 left join role_menu rm on ur.role_id = rm.role_id
+                 left join menu m on m.id = rm.menu_id
+        where user_id = #{userId}
+          and r.status = 0
+          and m.status = 0
+
+    </select>
+</mapper>
